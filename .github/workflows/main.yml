@@ -115,6 +115,7 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: viki_app:${{ steps.vars.outputs.IMAGE_TAGS }}
+          load: true
 
       - name: save docker image 
         run: docker save viki_app:${{ steps.vars.outputs.IMAGE_TAGS }} -o viki_app.tar
