@@ -154,7 +154,7 @@ jobs:
 
       - name: Push Image
         run: |
-          IMAGE_TAG="{{ needs.build.outputs.image-tags}}"
+          IMAGE_TAG="${{ needs.build.outputs.image-tags}}"
           docker image push ${{ secrets.DOCKERHUB_USERNAME}}/viki_app:$IMAGE_TAG
         
         
