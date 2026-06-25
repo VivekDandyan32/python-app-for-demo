@@ -135,7 +135,7 @@ jobs:
       - name: Download the Image
         uses: actions/download-artifact@v5.0.0
         with:
-          name: thinknyx_app_image
+          name: viki_app_image
           path: .
 
       - name: Load Docker Images
