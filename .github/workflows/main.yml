@@ -119,7 +119,7 @@ jobs:
       - name: save docker image 
         run: docker save viki_app:${{ steps.vars.outputs.IMAGE_TAGS }} -o viki_app.tar
 
-      - name: upload docker image artifact
+      - name: upload docker image artifacts
         uses: actions/upload-artifact@v7.0.1
         with:
           name: viki_app
