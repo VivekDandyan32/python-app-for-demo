@@ -138,7 +138,7 @@ jobs:
           name: thinknyx_app_image
           path: .
 
-      - name: Load Docker Image
+      - name: Load Docker Images
         run: docker load -i thinknyx_app.tar
 
       - name: Docker Login
