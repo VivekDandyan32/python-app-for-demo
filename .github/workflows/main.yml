@@ -151,6 +151,11 @@ jobs:
         run: |
           IMAGE_TAG="${{ needs.build.outputs.image-tags }}"
           docker image tag viki_app:$IMAGE_TAG ${{ secrets.DOCKERHUB_USERNAME}}/viki_app:$IMAGE_TAG
+     
+      - name: Debug build output
+        run: |
+          echo "IMAGE_TAG=[${{ needs.build.outputs.image-tags }}]"    
+          docker images
 
       - name: Push Image
         run: |
