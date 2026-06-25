@@ -79,11 +79,12 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v8.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}        
-      - name: SonarQube Quality Gate Check
+      - name: SonarQube Quality Gate Check 
         uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
+
   build:
     name: Build Image
     runs-on: ubuntu-latest
@@ -123,3 +124,4 @@ jobs:
         with:
           name: viki_app
           path: viki_app.tar
+
