@@ -1,4 +1,4 @@
-name: app-workflow
+name: CI Pipeline
 
 on: 
   push:
