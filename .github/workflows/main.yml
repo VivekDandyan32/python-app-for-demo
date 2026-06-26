@@ -43,22 +43,22 @@ jobs:
           sudo mv ./kubectl /usr/local/bin/kubectl
           kubectl version --client
 
-      # - name: Configure kubeconfig
-      #   run: | 
-      #     mkdir -p ~/.kube
-      #     echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
-      #     echo "===== kubeconfig ====="
-      #     kubectl config current-context
-      #     kubectl config view --minify
+      - name: Configure kubeconfig
+        run: | 
+          # mkdir -p ~/.kube
+          # echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+          echo "===== kubeconfig ====="
+          kubectl config current-context
+          kubectl config view --minify
 
-      #     echo "===== kubectl client ====="
-      #     kubectl version --client
+          echo "===== kubectl client ====="
+          kubectl version --client
 
-      #     echo "===== cluster-info ====="
-      #     kubectl cluster-info
+          echo "===== cluster-info ====="
+          kubectl cluster-info
 
-      #     echo "===== get nodes ====="
-      #     kubectl get nodes
+          echo "===== get nodes ====="
+          kubectl get nodes
               
       
 # yq - update item in yaml file - tool yaml querry
@@ -70,7 +70,7 @@ jobs:
 
       - name: update image name in deployment yaml file
         run: |
-          IMAGE_TAGS="${{ github.run.id }}-${ GITHUB_SHA::7 }"
-          IMAGE="ghcr.io/vivekdandyan32/viki_app:${IMAGE_TAGS}"
+          IMAGE_TAGS="${{ github.run.id }}-${GITHUB_SHA:0:7}""
+          export IMAGE="ghcr.io/vivekdandyan32/viki_app:${IMAGE_TAGS}"
           yw e '.spec.template.spec.containers[0].image = strenv(IMAGE)' manifest/deployment.yaml -i
           cat manifest/deployment.yaml
