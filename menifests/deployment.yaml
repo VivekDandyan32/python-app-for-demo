@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viki-app-deploy
+  labels:
+    app: viki-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: viki-app
+  template:
+    metadata:
+      labels:
+        app: viki-app
+    spec:
+      containers:
+      - name: viki-app-container
+        image: ghcr.io/vivekdandyan32/viki_app:28217798004-fccc81a
+        ports:
+        - containerPort: 8000

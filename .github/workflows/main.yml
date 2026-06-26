@@ -21,8 +21,9 @@ jobs:
     uses: VivekDandyan32/reusable-workflows/.github/workflows/ci-pipeline.yaml@main
     with:
       run_codeql: true
-      run_sonarqube: false
-      run_build: false
+      run_sonarqube: true
+      run_build: true
+      run_publish-ghcr: true
     secrets: 
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
