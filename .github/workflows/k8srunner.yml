@@ -1,0 +1,36 @@
+name: k8s runner
+
+on:  
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+    
+    
+
+jobs:
+  demo-1:
+    name: demo runner k8s
+    runs-on: github-actions-scaleset-config-demo
+    steps:
+      - name: run on k8s runner
+        run: |
+          echo "Hostname: $(hostname)"
+          echo "OS version:"
+          lsb_release -a || cat /etc/os-release
+          echo "Runner Name: ${{ runner.name }}"
+          echo "Runner OS: $ {{ runner.os }}"
+          sleep 120
+
+  demo-2:
+    name: demo runner k8s
+    runs-on: github-actions-scaleset-config-demo
+    steps:
+      - name: run on k8s runner
+        run: |
+          echo "Hostname: $(hostname)"
+          echo "OS version:"
+          lsb_release -a || cat /etc/os-release
+          echo "Runner Name: ${{ runner.name }}"
+          echo "Runner OS: $ {{ runner.os }}"
+          sleep 120        
