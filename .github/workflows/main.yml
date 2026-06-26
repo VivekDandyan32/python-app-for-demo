@@ -190,7 +190,8 @@ jobs:
       - name: Tag Image
         run: |
           IMAGE_TAG="${{ needs.build.outputs.image-tags }}"
-          docker image tag viki_app:$IMAGE_TAG ghcr.io/${{ github.repository_owner }}/viki_app:$IMAGE_TAG
+          OWNER=$(echo "{{ github.repository_owner }}") | tr '[:upper:]' '[:lower:]'
+          docker image tag viki_app:$IMAGE_TAG ghcr.io/$OWNER/viki_app:$IMAGE_TAG
 
       - name: Push Image
         run: |
