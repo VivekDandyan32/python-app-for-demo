@@ -31,7 +31,7 @@ jobs:
   
   depoy-with-kubectl:
     needs: ci-pipeline-job
-    runs_on: github-actions-scaleset-config-demo
+    runs-on: github-actions-scaleset-config-demo
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v7.0.0
