@@ -34,7 +34,6 @@ jobs:
     uses:  VivekDandyan32/reusable-workflows/.github/workflows/deployment-with-kubectl.yaml@main
     with:
       ENVIRONMENT: STAGING
-      NAMESPACE: ${{ vars.NAMESPACE }}
       IMAGE_NAME: ghcr.io/vivekdandyan32/viki_app
 
     secrets:
