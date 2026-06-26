@@ -162,4 +162,34 @@ jobs:
           IMAGE_TAG="${{ needs.build.outputs.image-tags}}"
           docker image push ${{ secrets.DOCKERHUB_USERNAME}}/viki_app:$IMAGE_TAG
         
-        
+  publish-ghcr:
+    name: Publish to github container registry
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download the Image
+        uses: actions/download-artifact@v5.0.0
+        with:
+          name: viki_app
+          path: .
+
+      - name: Load Docker Images
+        run: docker load -i viki_app.tar
+
+      - name: Login to ghcr
+        uses: docker/login-action@v3
+        with:
+          regisrty: ghcr.io
+          username: ${{ github.actor }}   #who trigger this job
+          password: ${{ secrets.GITHUBHUB_TOKEN }}  #github auto creates a GITHUBHUB_TOKEN secret to use is your workflow na need to generate manually
+# push to ghcr, create releases, add comments, create issues, read content of repo
+      - name: Tag Image
+        run: |
+          IMAGE_TAG="${{ needs.build.outputs.image-tags }}"
+          docker image tag viki_app:$IMAGE_TAG ghcr.io/${{ github.repository_owner }}/viki_app:$IMAGE_TAG
+
+      - name: Push Image
+        run: |
+          IMAGE_TAG="${{ needs.build.outputs.image-tags}}"
+          docker image push ghcr.io/${{ github.repository_owner}}/viki_app:$IMAGE_TAG      
