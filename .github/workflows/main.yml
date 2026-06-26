@@ -30,6 +30,9 @@ jobs:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   
   depoy-with-kubectl:
+    environment: STAGING
+    env:
+      NAMESPACE: $${{ vars.NAMESPACE }}
     needs: ci-pipeline-job
     runs-on: github-actions-scaleset-config-demo
     steps:
@@ -74,3 +77,13 @@ jobs:
           export IMAGE="ghcr.io/vivekdandyan32/viki_app:${IMAGE_TAGS}"
           yw e '.spec.template.spec.containers[0].image = strenv(IMAGE)' manifest/deployment.yaml -i
           cat manifest/deployment.yaml
+
+      - name: create namespace if not exist
+        run: | 
+         kubectl get ns $NAMESPACE || kubectl create ns $NAMESPACE
+
+      - name: update image name in deployment yaml file  
+        run: |    
+          kubectl apply -f manifest/ -n $NAMESPACE
+          kubectl get all -n $NAMESPACE
+
