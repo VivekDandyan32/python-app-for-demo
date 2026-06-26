@@ -183,7 +183,7 @@ jobs:
           regisrty: ghcr.io
           username: ${{ github.actor }}   #who trigger this job
           password: ${{ secrets.GITHUBHUB_TOKEN }}  #github auto creates a GITHUBHUB_TOKEN secret to use is your workflow na need to generate manually
-# push to ghcr, create releases, add comments, create issues, read content of repo
+# push to ghcr, create releases, add comments, create issues, read content of repo access
       - name: Tag Image
         run: |
           IMAGE_TAG="${{ needs.build.outputs.image-tags }}"
