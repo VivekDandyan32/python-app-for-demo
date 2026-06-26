@@ -9,6 +9,13 @@ on:
     branches:
       - main
 
+permissions:  
+  actions: read
+  security-events: write
+  packages: write
+  contents: read
+  
+
 jobs:
   ci-pipeline-job:
     uses: VivekDandyan32/reusable-workflows/.github/workflows/ci-pipeline.yaml@main
