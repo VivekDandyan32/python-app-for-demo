@@ -45,6 +45,7 @@ jobs:
   publish-hc:
     runs-on: ubuntu-latest
     steps:
+# install and configure helm 
       - name: checkout repo
         uses: actions/checkout@v5
       
@@ -55,7 +56,12 @@ jobs:
       
       - name: helm version
         run: helm version
-       
+
+# lint helm files
+      - name: helm lint
+        run: heml lint charts/
+
+      
         
 
       
