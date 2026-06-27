@@ -1,0 +1,9 @@
+apiVersion: v2
+name: viki-app
+description: A Helm chart for viki-app
+type: application
+version: 0.1.0
+appVersion: latest
+keywords:
+  - viki-app
+home: https://github.com/{{ .Release.Service }} # optional

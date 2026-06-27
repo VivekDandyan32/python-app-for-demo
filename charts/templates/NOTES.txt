@@ -1,0 +1,7 @@
+Thank you for installing {{ include "viki-app.fullname" . }}!
+Service Details
+  Service Type {{ .Values.service.type }}
+  Service Port {{ .Values.service.port }}
+
+To access the application (NodePort)
+  kubectl get svc {{ include "viki-app.fullname" . }}-svc
