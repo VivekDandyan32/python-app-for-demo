@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/VivekDandyan32/viki-app
-  tag: latest
+  tag: latest 
   pullPolicy: IfNotPresent
 
 nameOverride: ""

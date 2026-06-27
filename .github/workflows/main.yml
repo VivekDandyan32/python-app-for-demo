@@ -56,7 +56,29 @@ jobs:
       
       - name: helm version
         run: helm version
+  
+# yq to update values in chart.yaml and values.yaml
+      - name: Install yq
+        run: |
+          sudo curl -L https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o /usr/local/bin/yq
+          sudo chmod +x /usr/local/bin/yq  
 
+      - name: Check Helm & yq Version
+        run: |
+          helm version     
+          yq --version
+
+      - name: update image name in Chart 7 values YAML
+        run: |
+          export IMAGE_TAGS="${{ github.run_id}}-${GITHUB_SHA::7}"
+          export VERSION="0.1.0-${IMAGE_TAGS}"
+          yq e '.image.tag = strenv(IMAGE_TAGS)' charts/values.yaml -i
+          yq e '.version = strenv(VERSION)' charts/Chart.yaml -i
+          yq e '.appVersion = strenv(IMAGE_TAGS)' charts/Chart.yaml -i
+          cat charts/values.yaml
+          cat charts/Chart.yaml  
+          
+          
 # lint helm files
       - name: helm lint
         run: helm lint charts/
@@ -66,6 +88,11 @@ jobs:
         run: |
           helm package charts/
           ls -ltr .
+
+      - name: Check Helm & yq Version
+        run: |
+          helm version     
+          yq --version
         
 
       
