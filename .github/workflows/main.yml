@@ -116,6 +116,14 @@ jobs:
       #     export IMAGE_TAGS="${{ github.run_id}}-${GITHUB_SHA::7}"
       #     export VERSION="0.1.0-${IMAGE_TAGS}"
       #     helm push viki-app-${VERSION}.tgz oci://${{ env.OCI_REGISTRY }}/${{ env.OCI_REPOSITORY }}
+      # - name: Push Helm Chart to GHCR (OCI)
+      #   run: |
+      #     set -x
+
+      #     export IMAGE_TAGS="${{ github.run_id }}-${GITHUB_SHA::7}"
+      #     export VERSION="0.1.0-${IMAGE_TAGS}"
+
+      #     helm push "viki-app-${VERSION}.tgz" "oci://ghcr.io/${{ github.repository_owner }}"    
       - name: Push Helm Chart to GHCR (OCI)
         run: |
           set -x
@@ -123,9 +131,14 @@ jobs:
           export IMAGE_TAGS="${{ github.run_id }}-${GITHUB_SHA::7}"
           export VERSION="0.1.0-${IMAGE_TAGS}"
 
-          helm push "viki-app-${VERSION}.tgz" "oci://ghcr.io/${{ github.repository_owner }}"    
-          
-          
+          # Convert GitHub username to lowercase
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+
+          echo "Owner: ${OWNER}"
+
+          helm push "viki-app-${VERSION}.tgz" \
+            "oci://ghcr.io/${OWNER}/python-app-for-demo"
+                
       - name: Logout from GHCR
         run: helm registry logout ${{ env.OCI_REGISTRY }}   
 
