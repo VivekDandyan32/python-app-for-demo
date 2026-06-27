@@ -15,7 +15,7 @@ permissions:
   
 env: 
   OCI_REGISTRY: ghcr.io
-  OCI_REPOSITORY: ${{ github.repository_owner }}
+  OCI_REPOSITORY: ${{ github.repository_owner }}/python-app-for-demo
 jobs:
   # ci-pipeline-job:
   #   uses: VivekDandyan32/reusable-workflows/.github/workflows/ci-pipeline.yaml@main
@@ -54,7 +54,7 @@ jobs:
       - name: setup helm
         uses: azure/setup-helm@v3
         with:
-          version: v3.12.0
+          version: v3.18.4
       
       - name: helm version
         run: helm version
