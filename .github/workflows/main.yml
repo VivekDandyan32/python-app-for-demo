@@ -15,7 +15,7 @@ permissions:
   
 env: 
   OCI_REGISTRY: ghcr.io
-  OCI_REPOSITORY: ${{ github.repository_owner }}/python-app-for-demo
+  OCI_REPOSITORY: ${{ github.repository_owner }}
 jobs:
   # ci-pipeline-job:
   #   uses: VivekDandyan32/reusable-workflows/.github/workflows/ci-pipeline.yaml@main
