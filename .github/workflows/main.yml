@@ -1,6 +1,7 @@
 name: CI Pipeline for reuse workflows
 # call workflows
-on: 
+on:
+  workflow_dispatch: 
   push:
     branches:
       - main
