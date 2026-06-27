@@ -19,7 +19,7 @@ jobs:
           echo "OS version:"
           lsb_release -a || cat /etc/os-release
           echo "Runner Name: ${{ runner.name }}"
-          echo "Runner OS: $ {{ runner.os }}"
+          echo "Runner OS: ${{ runner.os }}"
           sleep 120
 
   demo-2:
@@ -34,3 +34,5 @@ jobs:
           echo "Runner Name: ${{ runner.name }}"
           echo "Runner OS: $ {{ runner.os }}"
           sleep 120        
+
+       

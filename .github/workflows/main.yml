@@ -1,4 +1,4 @@
-name: CI Pipeline for reuse workflow
+name: CI Pipeline for reuse workflows
 # call workflows
 on: 
   push:
