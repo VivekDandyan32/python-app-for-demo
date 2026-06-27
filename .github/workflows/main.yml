@@ -15,30 +15,51 @@ permissions:
   
 
 jobs:
-  ci-pipeline-job:
-    uses: VivekDandyan32/reusable-workflows/.github/workflows/ci-pipeline.yaml@main
-    with:
-      run_codeql: true
-      run_sonarqube: true
-      run_build: true
-      run_publish-ghcr: true
-    secrets: 
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  # ci-pipeline-job:
+  #   uses: VivekDandyan32/reusable-workflows/.github/workflows/ci-pipeline.yaml@main
+  #   with:
+  #     run_codeql: true
+  #     run_sonarqube: true
+  #     run_build: true
+  #     run_publish-ghcr: true
+  #   secrets: 
+  #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #     DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  #     DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   
-  depoy-with-kubectl:
-    needs: ci-pipeline-job
-    uses:  VivekDandyan32/reusable-workflows/.github/workflows/deployment-with-kubectl.yaml@main
-    with:
-      ENVIRONMENT: STAGING
-      IMAGE_NAME: ghcr.io/vivekdandyan32/viki_app
+  # depoy-with-kubectl:
+  #   needs: ci-pipeline-job
+  #   uses:  VivekDandyan32/reusable-workflows/.github/workflows/deployment-with-kubectl.yaml@main
+  #   with:
+  #     ENVIRONMENT: STAGING
+  #     IMAGE_NAME: ghcr.io/vivekdandyan32/viki_app
 
-    secrets:
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}  
+  #   secrets:
+  #     KUBECONFIG: ${{ secrets.KUBECONFIG }}  
 
-  sel-tests:
-    needs: depoy-with-kubectl
-    uses: VivekDandyan32/reusable-workflows/.github/workflows/sel-run-tests.yaml@main
-    with:
-      ENVIRONMENT: STAGING
+  # sel-tests:
+  #   needs: depoy-with-kubectl
+  #   uses: VivekDandyan32/reusable-workflows/.github/workflows/sel-run-tests.yaml@main
+  #   with:
+  #     ENVIRONMENT: STAGING
+  publish-hc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v5
+      
+      - name: setup helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.12.0
+      
+      - name: helm version
+        run: helm version
+       
+        
+
+      
+
+      
+
+
