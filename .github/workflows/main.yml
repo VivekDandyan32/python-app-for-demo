@@ -100,6 +100,18 @@ jobs:
       - name: Login to GHCR (OCI)
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ${{ env.OCI_REGISTRY }} -u ${{ github.actor }} --password-stdin
+
+      - name: Debug Push
+        run: |
+          export IMAGE_TAGS="${{ github.run_id }}-${GITHUB_SHA::7}"
+          export VERSION="0.1.0-${IMAGE_TAGS}"
+
+          echo "Registry : ${{ env.OCI_REGISTRY }}"
+          echo "Repository : ${{ env.OCI_REPOSITORY }}"
+          echo "Chart : viki-app-${VERSION}.tgz"
+          echo "Target : oci://${{ env.OCI_REGISTRY }}/${{ env.OCI_REPOSITORY }}"
+          
+          
       - name: Push Helm Chart to GHCR (OCI)
         run: |
           export IMAGE_TAGS="${{ github.run_id}}-${GITHUB_SHA::7}"
@@ -107,6 +119,6 @@ jobs:
           helm push viki-app-${VERSION}.tgz oci://${{ env.OCI_REGISTRY }}/${{ env.OCI_REPOSITORY }}
       - name: Logout from GHCR
         run: helm registry logout ${{ env.OCI_REGISTRY }}
-      
+
 
 
