@@ -74,7 +74,7 @@ jobs:
         mkdir -p reports
         pytest tests/ --html=reports/selenium-report.html --self-contained-html
 
-    - name: Upload Selenium Test Report
+    - name: Upload Selenium Test Reports
       uses: actions/upload-artifact@v4
       with:
         name: selenium-test-report
