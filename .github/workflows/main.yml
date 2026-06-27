@@ -1,4 +1,4 @@
-name: CI Pipeline for reuse workflows
+name: helmcharts
 # call workflows
 on:
   workflow_dispatch: 
@@ -59,7 +59,7 @@ jobs:
 
 # lint helm files
       - name: helm lint
-        run: heml lint charts/
+        run: helm lint charts/
 
       
         
