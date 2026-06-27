@@ -102,7 +102,7 @@ jobs:
         run: |
           export IMAGE_TAGS="${{ github.run_id}}-${GITHUB_SHA::7}"
           export VERSION="0.1.0-${IMAGE_TAGS}"
-          helm push viki-app-${VERSION}.tgz oci://ghcr.io/VivekDandyan32/helm-charts
+          helm push viki-app-${VERSION}.tgz oci://ghcr.io/VivekDandyan32/python-app-for-demo
       - name: Logout from GHCR
         run: helm registry logout ghcr.io
       
