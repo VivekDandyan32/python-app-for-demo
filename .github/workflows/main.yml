@@ -61,7 +61,11 @@ jobs:
       - name: helm lint
         run: helm lint charts/
 
-      
+# create helm chart via files in charts folder
+      - name: create package
+        run: |
+          helm package charts/
+          ls -ltr .
         
 
       
