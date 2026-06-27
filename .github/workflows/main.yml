@@ -1,6 +1,7 @@
-name: CI Pipeline
+name: CI Pipeline for reuse workflows
 # call workflows
-on: 
+on:
+  workflow_dispatch: 
   push:
     branches:
       - main
@@ -22,8 +23,19 @@ jobs:
     with:
       run_codeql: true
       run_sonarqube: true
+      run_build: true
+      run_publish-ghcr: true
     secrets: 
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-     
+  
+  depoy-with-kubectl:
+    needs: ci-pipeline-job
+    uses:  VivekDandyan32/reusable-workflows/.github/workflows/deployment-with-kubectl.yaml@main
+    with:
+      ENVIRONMENT: STAGING
+      IMAGE_NAME: ghcr.io/vivekdandyan32/viki_app
+
+    secrets:
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}  
