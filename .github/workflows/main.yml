@@ -39,3 +39,9 @@ jobs:
 
     secrets:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}  
+
+  sel-tests:
+    needs: depoy-with-kubectl
+    uses: VivekDandyan32/reusable-workflows/.github/workflows/sel-run-tests.yaml@main
+    with:
+      ENVIRONMENT: STAGING
